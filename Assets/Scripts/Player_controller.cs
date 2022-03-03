@@ -47,13 +47,13 @@ public class Player_controller : MonoBehaviour
             dir = 'D';
             Direction();
         }
-        coll = Physics2D.OverlapPointAll(target.transform.position);
+        coll = Physics2D.OverlapCircleAll(target.transform.position, 0.3f);
         //Vector2 coll_center = new Vector2 (target.transform.position.x, target.transform.position.y);
         //Vector2 coll_size = new Vector2 (0.25f, 0);
         
         //Physics2D.OverlapBoxNonAlloc(coll_center, coll_size, 0, coll);
         //coll = Physics2D.OverlapBoxAll(coll_center, coll_size, 0);
-        if (coll.Length > 0){
+        if (coll.Length > 1){
             ObjectOnPath();
         }
     }
@@ -61,8 +61,8 @@ public class Player_controller : MonoBehaviour
     private void FixedUpdate() {
         Vector3 dir = target.transform.position - this.transform.position;
         dir.z = 0;
-        //this.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-        //targets.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        this.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        targets.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
     }
 
     private void Direction(){
@@ -88,7 +88,7 @@ public class Player_controller : MonoBehaviour
             case 'D':
             //coll_front = Physics2D.OverlapPointAll(target_D.transform.position);
             //if (coll_front.Length > 0) return;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, -90);
             break;
         }
         speed = Config.player_speed;
@@ -96,6 +96,7 @@ public class Player_controller : MonoBehaviour
 
     private void ObjectOnPath(){
         foreach (Collider2D item in coll){
+            print("ПРОВЕРКА");
             if (item.gameObject.tag == "wall"){
                 speed = 0;
             } else {
