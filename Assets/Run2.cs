@@ -35,6 +35,9 @@ public class Run2 : MonoBehaviour
             }
         }
         randX = 1;
+
+        
+
         //генерация поля
         //for (i = 1; i < constY - 2; i++)
         for (i = 1; i < constY - 2; i++)
@@ -112,6 +115,9 @@ public class Run2 : MonoBehaviour
             }
             randX = 1;
         }
+
+        
+
         // проверка списка точек без стен
         for( i=0; i< destr.Count; i++)
         {
@@ -128,57 +134,74 @@ public class Run2 : MonoBehaviour
         {
             // проверка соеденение стеной соседа
             Debug.Log(m[0].ToString() + "  =  " + m[1].ToString());
-            // проверяем возможность по направлению 0
 
-            // Стена на -2 (вертикально вниз)
-            stena1();
+            mas[m[0], m[1]] = 0;
 
-
-            int stena1()
-            {
-                if (mas[m[0] + 1, m[1] - 1] == 1)
-                {
-                    if (mas[m[0] + 1, m[1] - 1] == -1 || mas[m[0], m[1] - 1] == 0)
-                    {
-                        Debug.Log("Нельзя поставить");
-                        return -10;
-                    }
-                    else if (mas[m[0], m[1] - 1] == -1 || mas[m[0] - 1, m[1] - 1] == 0)
-                    {
-                        if (mas[m[0] - 1, m[1] - 1] == 1)
-                        {
-                            Debug.Log("Нельзя поставить");
-                            return -10;
-                        }
-                        return -2;
-                    }
-                }
-                else
-                {
-                    if (mas[m[0], m[1] - 1] == -1 || mas[m[0] - 1, m[1] - 1] == 0)
-                    {
-                        if (mas[m[0] - 1, m[1] - 1] == 1)
-                        {
-                            Debug.Log("Нельзя поставить");
-                            return -10;
-                        }
-                        return -2;
-                    }
-                }
-
-                return -10;
+            if (mas[m[0] - 1, m[1] + 1] == 0 || mas[m[0] ,m[1] + 1] == -1){
+                mas[m[0] - 1, m[1]] = 1;
+                go1 = GameObject.Find("toch*" + (m[0] - 1) + "*" + m[1]).transform.GetChild(0).gameObject;
+                go1.transform.localPosition = Vector3.zero;
+                go1.transform.localEulerAngles = new Vector3(0, 0, 0);
+                print("изменение стены");
+            } else {
+                mas[m[0], m[1]] = -1;
+                go1 = Instantiate(Stena3);
+                go1.transform.SetParent(GameObject.Find("toch*" + m[0] + "*" + m[1]).transform);
+                go1.transform.localPosition = Vector3.zero;
+                go1.transform.localEulerAngles = new Vector3(0, 0, 180);
             }
-                //(mas[m[0], m[1] - 1] != 0 || mas[m[0] + 1, m[1] - 1] != -1))
-            {
-                if ((mas[m[0] - 1, m[1] - 1] != 0 || mas[m[0], m[1] - 1] != -1) || 
-                    (mas[m[0], m[1] - 1] != -2 || mas[m[0] - 1, m[1] - 1] != 1))
-                {
-                    
-                }
-            }
-
-            
+            if (m[0] == 1) print("крайняя слева");
+            if (m[0] == 17) print("крайняя справа");
+            if (m[1] == 1) print("крайняя снизу");
+            if (m[1] == 10) print("крайняя справа");
         }
+
+        //Генерация внешних стен
+        for (int yyy = 0; yyy < constY - 1; yyy++)
+            {
+                go = Instantiate(tochPrefab, Par.transform);
+                go.name = "tochechkaHorizontal*" + yyy;
+                go.transform.localPosition = new Vector3(0, yyy, 20);
+                
+                go1 = Instantiate(Stena3);
+                go1.transform.SetParent(go.transform);
+                go1.transform.localPosition = Vector3.zero;
+                go1.transform.localEulerAngles = new Vector3(0, 0, 90);
+                mas[0, yyy] = 1;
+
+                go = Instantiate(tochPrefab, Par.transform);
+                go.name = "tochechkaHorizontal*" + yyy;
+                go.transform.localPosition = new Vector3(constX - 1, yyy, 20);
+
+                go1 = Instantiate(Stena3);
+                go1.transform.SetParent(go.transform);
+                go1.transform.localPosition = Vector3.zero;
+                go1.transform.localEulerAngles = new Vector3(0, 0, 90);
+                mas[constX - 1, yyy] = 1;
+            }
+ц
+            for (int xxx = 0; xxx < constX - 1; xxx++)
+            {
+                go = Instantiate(tochPrefab, Par.transform);
+                go.name = "tochechkaVertical*" + xxx;
+                go.transform.localPosition = new Vector3(xxx, 0, 20);
+                
+                go1 = Instantiate(Stena3);
+                go1.transform.SetParent(go.transform);
+                go1.transform.localPosition = Vector3.zero;
+                go1.transform.localEulerAngles = new Vector3(0, 0, 0);
+                mas[xxx, 0] = 1;
+
+                go = Instantiate(tochPrefab, Par.transform);
+                go.name = "tochechkaVertical*" + xxx;
+                go.transform.localPosition = new Vector3(xxx, constY - 1, 20);
+
+                go1 = Instantiate(Stena3);
+                go1.transform.SetParent(go.transform);
+                go1.transform.localPosition = Vector3.zero;
+                go1.transform.localEulerAngles = new Vector3(0, 0, 0);
+                mas[xxx, constY - 1] = 1;
+            }
     }
 
     //вертикально вниз (-2)

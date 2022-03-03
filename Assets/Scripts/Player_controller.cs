@@ -96,11 +96,10 @@ public class Player_controller : MonoBehaviour
 
     private void ObjectOnPath(){
         foreach (Collider2D item in coll){
-            print("ПРОВЕРКА");
-            if (item.gameObject.tag == "wall"){
+            if (item.gameObject.tag == "Wall"){
                 speed = 0;
             } else {
-                Debug.Log("не стена");
+                // Debug.Log("не стена");
             }
         }
     }
