@@ -7,11 +7,6 @@ public class Player_controller : MonoBehaviour
     private GameObject player;
     private Collider2D target1; 
     private GameObject target; //Точка для направления движения
-    private GameObject targets; //Группа точек
-    private GameObject target_U; //Точка впереди
-    private GameObject target_R; //Точка справа
-    private GameObject target_L; //Точка слева
-    private GameObject target_D; //Точка сзади
     private char dir = ' ';
     private float speed = 0;
     private Collider2D[] coll;
@@ -20,11 +15,6 @@ public class Player_controller : MonoBehaviour
 
     private void Awake() {
         player = this.gameObject;
-        targets = GameObject.Find("Targets").gameObject;
-        target_R = targets.transform.GetChild(0).gameObject;
-        target_L = targets.transform.GetChild(1).gameObject;
-        target_U = targets.transform.GetChild(2).gameObject;
-        target_D = targets.transform.GetChild(3).gameObject;
         
         target1 = this.transform.GetChild(0).gameObject.GetComponent<Collider2D>();
         target = this.transform.GetChild(0).gameObject;
@@ -47,7 +37,7 @@ public class Player_controller : MonoBehaviour
             dir = 'D';
             Direction();
         }
-        coll = Physics2D.OverlapCircleAll(target.transform.position, 0.3f);
+        coll = Physics2D.OverlapCircleAll(target.transform.position, 0.28f);
         //Vector2 coll_center = new Vector2 (target.transform.position.x, target.transform.position.y);
         //Vector2 coll_size = new Vector2 (0.25f, 0);
         
