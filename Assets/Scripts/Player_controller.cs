@@ -52,7 +52,12 @@ public class Player_controller : MonoBehaviour
         Vector3 dir = target.transform.position - this.transform.position;
         dir.z = 0;
         this.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-        targets.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        // if (speed != 0)
+        // {
+        //     this.GetComponent<Animator>().enabled = true;
+        // } else {
+        //     this.GetComponent<Animator>().enabled = false;
+        // }
     }
 
     private void Direction(){
