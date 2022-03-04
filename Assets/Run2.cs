@@ -177,9 +177,9 @@ public class Run2 : MonoBehaviour
                 go1.transform.SetParent(go.transform);
                 go1.transform.localPosition = Vector3.zero;
                 go1.transform.localEulerAngles = new Vector3(0, 0, 90);
-                mas[constX - 1, yyy] = 1;
+                mas[constX - 2, yyy] = 1;
             }
-ц
+
             for (int xxx = 0; xxx < constX - 1; xxx++)
             {
                 go = Instantiate(tochPrefab, Par.transform);
@@ -200,7 +200,7 @@ public class Run2 : MonoBehaviour
                 go1.transform.SetParent(go.transform);
                 go1.transform.localPosition = Vector3.zero;
                 go1.transform.localEulerAngles = new Vector3(0, 0, 0);
-                mas[xxx, constY - 1] = 1;
+                mas[xxx, constY - 2] = 1;
             }
     }
 
