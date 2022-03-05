@@ -19,27 +19,22 @@ public class TriggerEnemy : MonoBehaviour
     private void Start() {
         enemy.transform.position = new Vector3(player.transform.position.x + 5 ,player.transform.position.y + 5 ,1);
     }
-    private void FixedUpdate() {
-        Vector3 dir = target.transform.position - enemy.transform.position;
-        dir.z = 1;
-        enemy.transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-    }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        print(other.tag);
-        if (other.gameObject.tag == "Player")
-        {
-            speed = Config.ghost_speed;
-        }
-        //print("Столкновение");
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        print(other.tag);
-        if (other.gameObject.tag == "Player")
-        {
-            speed = 0f;
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other) {
+    //     //print(other.tag);
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         speed = Config.ghost_speed;
+    //     }
+    //     //print("Столкновение");
+    // }
+    // private void OnTriggerExit2D(Collider2D other) {
+    //     //print(other.tag);
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         speed = 0f;
+    //     }
+    // }
 
     public void ChangeDirection()
     {

@@ -133,7 +133,7 @@ public class Run2 : MonoBehaviour
         foreach (int[] m in destr)
         {
             // проверка соеденение стеной соседа
-            Debug.Log(m[0].ToString() + "  =  " + m[1].ToString());
+            //Debug.Log(m[0].ToString() + "  =  " + m[1].ToString());
 
             mas[m[0], m[1]] = 0;
 
@@ -142,7 +142,7 @@ public class Run2 : MonoBehaviour
                 go1 = GameObject.Find("toch*" + (m[0] - 1) + "*" + m[1]).transform.GetChild(0).gameObject;
                 go1.transform.localPosition = Vector3.zero;
                 go1.transform.localEulerAngles = new Vector3(0, 0, 0);
-                print("изменение стены");
+                //print("изменение стены");
             } else {
                 mas[m[0], m[1]] = -1;
                 go1 = Instantiate(Stena3);
